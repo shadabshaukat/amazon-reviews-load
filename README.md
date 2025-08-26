@@ -36,10 +36,22 @@ amazon_reviews_loader/
 
 ## Getting Started
 
+### 1. Clone Repository
+
+```bash
+git clone -r requirements_amazon_reviews_loader.txt
+```
+
+### 2. Download Dataset
+
+```bash
+pip3 install -r requirements_amazon_reviews_loader.txt
+```
+
 ### 1. Install Requirements
 
 ```bash
-pip install -r requirements_amazon_reviews_loader.txt
+pip3 install -r requirements_amazon_reviews_loader.txt
 ```
 
 ### 2. Set Up Postgres
@@ -70,17 +82,17 @@ PGPASSWORD=your_password
 
 ## Usage
 
-### Loading Only Metadata (without reviews)
+### Loading Only Metadata (without reviews) - Load First
 
 ```bash
-python amazon_reviews_loader.py --metadata meta_Cell_Phones_and_Accessories.jsonl --reviews /dev/null
+python3 amazon_reviews_loader.py --metadata meta_Cell_Phones_and_Accessories.jsonl --reviews /dev/null
 ```
 This will only load metadata into Postgres. No user reviews will be loaded.
 
-### Loading Only User Reviews (without metadata)
+### Loading Only User Reviews (without metadata) - Load Next
 
 ```bash
-python amazon_reviews_loader.py --metadata /dev/null --reviews Cell_Phones_and_Accessories.jsonl
+python3 amazon_reviews_loader.py --metadata /dev/null --reviews Cell_Phones_and_Accessories.jsonl
 ```
 This will only load user review data. Make sure the referenced parent_asin values already exist in the metadata table.
 
@@ -89,14 +101,14 @@ This will only load user review data. Make sure the referenced parent_asin value
 To run a **full batch load** of both metadata and user reviews in one step, use:
 
 ```bash
-python amazon_reviews_loader.py --metadata meta_Cell_Phones_and_Accessories.jsonl --reviews Cell_Phones_and_Accessories.jsonl
+python3 amazon_reviews_loader.py --metadata meta_Cell_Phones_and_Accessories.jsonl --reviews Cell_Phones_and_Accessories.jsonl
 ```
 This command will ingest all records into your database with FTS and vector search enabled.
 
 ### Test Mode (Dry Run: 2-3 records per file)
 
 ```bash
-python amazon_reviews_loader.py --metadata meta_Cell_Phones_and_Accessories.jsonl --reviews Cell_Phones_and_Accessories.jsonl --test
+python3 amazon_reviews_loader.py --metadata meta_Cell_Phones_and_Accessories.jsonl --reviews Cell_Phones_and_Accessories.jsonl --test
 ```
 
 ---
