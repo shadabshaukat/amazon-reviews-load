@@ -115,11 +115,6 @@ python3 amazon_reviews_loader.py --metadata meta_Cell_Phones_and_Accessories.jso
 ```
 This command will ingest all records into your database with FTS and vector search enabled.
 
-### Test Mode (Dry Run: 2-3 records per file)
-
-```bash
-python3 amazon_reviews_loader.py --metadata meta_Cell_Phones_and_Accessories.jsonl --reviews Cell_Phones_and_Accessories.jsonl --test
-```
 
 ---
 
