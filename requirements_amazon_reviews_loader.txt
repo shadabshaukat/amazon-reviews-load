@@ -1,0 +1,7 @@
+psycopg2-binary>=2.9
+tqdm
+sentence-transformers
+torch
+einops
+python-dotenv
+PyYAML
