@@ -39,22 +39,32 @@ amazon_reviews_loader/
 ### 1. Clone Repository
 
 ```bash
-git clone -r requirements_amazon_reviews_loader.txt
+git clone https://github.com/shadabshaukat/amazon-reviews-load.git
+
+cd amazon-reviews-load/
 ```
 
 ### 2. Download Dataset
 
+Hugging Face : https://huggingface.co/datasets/shadabshaukat/amazon-cell-phones-accessories-user-reviews-metadata-may96-sep23
+
+```bash
+curl -X GET \
+     "https://datasets-server.huggingface.co/first-rows?dataset=shadabshaukat%2Famazon-cell-phones-accessories-user-reviews-metadata-may96-sep23&config=default&split=train"
+```
+
+```bash
+gzip -d Cell_Phones_and_Accessories.jsonl.gz
+gzip -d meta_Cell_Phones_and_Accessories.jsonl.gz
+```
+
+### 3. Install Requirements
+
 ```bash
 pip3 install -r requirements_amazon_reviews_loader.txt
 ```
 
-### 1. Install Requirements
-
-```bash
-pip3 install -r requirements_amazon_reviews_loader.txt
-```
-
-### 2. Set Up Postgres
+### 4. Set Up Postgres
 
 - Ensure Postgres 16+ is running.
 - Enable required extensions as a superuser (do this once per database):
@@ -67,7 +77,7 @@ pip3 install -r requirements_amazon_reviews_loader.txt
   psql -U youruser -d yourdb -f postgres_schema_amazon_reviews.sql
   ```
 
-### 3. Configure Database Connection
+### 5. Configure Database Connection
 
 Create a `.env` file in your project directory with:
 ```env
