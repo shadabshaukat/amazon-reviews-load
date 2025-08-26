@@ -61,6 +61,8 @@ gzip -d meta_Cell_Phones_and_Accessories.jsonl.gz
 ### 3. Install Requirements
 
 ```bash
+python3 -m venv venv
+source venv/bin/activate
 pip3 install -r requirements_amazon_reviews_loader.txt
 ```
 
@@ -101,20 +103,46 @@ This will only load metadata into Postgres. No user reviews will be loaded.
 
 ### Loading Only User Reviews (without metadata) - Load Next
 
+**Strict mode (FK errors if metadata missing):**
 ```bash
 python3 amazon_reviews_loader.py --metadata /dev/null --reviews Cell_Phones_and_Accessories.jsonl
 ```
 This will only load user review data. Make sure the referenced parent_asin values already exist in the metadata table.
 
+**Resilient mode (skip reviews missing parent metadata):**
+```bash
+python3 amazon_reviews_loader.py --metadata /dev/null --reviews Cell_Phones_and_Accessories.jsonl --skip-missing-metadata
+```
+This will skip and log any reviews whose `parent_asin` is not present in the metadata table.
+
 ### Loading Both Metadata and User Reviews (Recommended - Single Command)
 
-To run a **full batch load** of both metadata and user reviews in one step, use:
-
+**Strict mode (FK errors if metadata missing):**
 ```bash
 python3 amazon_reviews_loader.py --metadata meta_Cell_Phones_and_Accessories.jsonl --reviews Cell_Phones_and_Accessories.jsonl
 ```
 This command will ingest all records into your database with FTS and vector search enabled.
 
+**Resilient mode (skip reviews missing parent metadata):**
+```bash
+python3 amazon_reviews_loader.py --metadata meta_Cell_Phones_and_Accessories.jsonl --reviews Cell_Phones_and_Accessories.jsonl --skip-missing-metadata
+```
+This will skip and log any user reviews whose `parent_asin` is not present in the metadata.
+
+### Test Mode (Dry Run with All Options)
+
+Try out test mode with any of the above commands to only load a small sample for validation:
+
+```bash
+python3 amazon_reviews_loader.py --metadata meta_Cell_Phones_and_Accessories.jsonl --reviews Cell_Phones_and_Accessories.jsonl --skip-missing-metadata --test
+```
+
+⚠️ **Note:** In `--test` mode, only the first few records from each file are loaded. If the `parent_asin` values in those first reviews do not match the first 3 metadata rows, those reviews will be skipped—even if a matching metadata row exists elsewhere in your file.  
+To fully validate the loading pipeline, either:
+- Create a small test subset where parent_asin values overlap between your metadata and reviews files,
+- Or run the full ingest command (without `--test`) for real-world scenarios.
+
+This test mode is for quick sanity checks only and may not load reviews unless the test slices align.
 
 ---
 
