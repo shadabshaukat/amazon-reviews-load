@@ -179,18 +179,29 @@ def transform_review_json(rj: dict) -> dict:
     row.pop("timestamp", None)
     return row
 
-def load_user_reviews(reviews_path: str, batch_size: int = 128, test_max=None):
+def load_user_reviews(reviews_path: str, batch_size: int = 128, test_max=None, skip_missing_metadata=False):
     logging.info(f"Loading user reviews from {reviews_path} ...")
     review_rows = []
     review_texts = []
     count = 0
     model = SentenceTransformer(EMBED_MODEL, trust_remote_code=True)
+    valid_parent_asins = None
+
     with get_db_conn() as conn, conn.cursor() as cur:
+        if skip_missing_metadata:
+            # fetch all valid parent_asin from metadata table
+            cur.execute("SELECT parent_asin FROM metadata")
+            valid_parent_asins = set(r[0] for r in cur.fetchall())
+            logging.info(f"Loaded {len(valid_parent_asins)} parent_asins from metadata for FK validation")
+
         with open(reviews_path, "r", encoding="utf-8") as fp:
             for rj in tqdm(parse_jsonl(fp, max_records=test_max), desc="User Reviews", unit="rec"):
                 row = transform_review_json(rj)
                 if not row["parent_asin"]:
                     logging.warning(f"Skipping user review: missing parent_asin: {rj}")
+                    continue
+                if skip_missing_metadata and row["parent_asin"] not in valid_parent_asins:
+                    logging.warning(f"Skipping user review {row.get('asin') or ''}: parent_asin={row['parent_asin']} not in metadata")
                     continue
                 review_rows.append(row)
                 review_texts.append(row.get("review_text") or "")
@@ -247,16 +258,17 @@ def main():
     parser.add_argument('--metadata', '-m', required=True, help="Path to metadata.jsonl")
     parser.add_argument('--reviews', '-r', required=True, help="Path to user_reviews.jsonl")
     parser.add_argument('--test', action="store_true", help="Run only a small sample load (2-3 records per file) for dry run validation.")
+    parser.add_argument('--skip-missing-metadata', action="store_true", help="Skip user reviews referencing parent_asin not present in metadata (instead of failing with FK error).")
     args = parser.parse_args()
 
     ensure_tables()
     if args.test:
         load_metadata(args.metadata, test_max=3)
-        load_user_reviews(args.reviews, batch_size=2, test_max=2)
+        load_user_reviews(args.reviews, batch_size=2, test_max=2, skip_missing_metadata=args.skip_missing_metadata)
         logging.info("Sample test run completed (2-3 records per file loaded).")
     else:
         load_metadata(args.metadata)
-        load_user_reviews(args.reviews)
+        load_user_reviews(args.reviews, skip_missing_metadata=args.skip_missing_metadata)
         logging.info("All data loaded.")
 
 if __name__ == "__main__":
