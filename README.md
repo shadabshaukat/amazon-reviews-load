@@ -49,7 +49,12 @@ cd amazon-reviews-loader/
 Download Dataset from Hugging Face : https://huggingface.co/datasets/shadabshaukat/amazon-cell-phones-accessories-user-reviews-metadata-may96-sep23
 
 ```bash
+wget https://huggingface.co/datasets/shadabshaukat/amazon-cell-phones-accessories-user-reviews-metadata-may96-sep23/resolve/main/meta_Cell_Phones_and_Accessories.jsonl.gz
+
+wget https://huggingface.co/datasets/shadabshaukat/amazon-cell-phones-accessories-user-reviews-metadata-may96-sep23/resolve/main/Cell_Phones_and_Accessories.jsonl.gz
+
 gzip -d Cell_Phones_and_Accessories.jsonl.gz
+
 gzip -d meta_Cell_Phones_and_Accessories.jsonl.gz
 ```
 
