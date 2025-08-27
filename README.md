@@ -64,6 +64,7 @@ gzip -d meta_Cell_Phones_and_Accessories.jsonl.gz
 python3 -m venv venv
 source venv/bin/activate
 pip3 install -r requirements_amazon_reviews_loader.txt
+pip install --upgrade pip
 ```
 
 ### 4. Set Up Postgres
