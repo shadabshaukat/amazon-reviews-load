@@ -75,6 +75,10 @@ pip3 install -r requirements_amazon_reviews_loader.txt
 pip install --upgrade pip
 ```
 
+```bash
+sudo iptables -I INPUT -p tcp --dport 8000 -j ACCEPT
+```
+
 ### 4. Set Up Postgres
 
 - Ensure Postgres 16+ is running.
