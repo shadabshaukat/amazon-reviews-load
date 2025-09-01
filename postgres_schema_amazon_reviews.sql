@@ -86,6 +86,9 @@ CREATE INDEX IF NOT EXISTS idx_user_reviews_fts ON user_reviews USING GIN (fts);
 -- Index for fast vector similarity search on review embeddings
 CREATE INDEX IF NOT EXISTS idx_user_reviews_embedding ON user_reviews USING ivfflat (embedding vector_cosine_ops);
 
+-- For very large review corpora and frequent typos, consider adding an index for review titles
+CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_user_reviews_title_trgm ON user_reviews USING GIN (title gin_trgm_ops);
+
 -- [INFO]
 -- - Using SentenceTransformers with HuggingFace model "nomic-ai/nomic-embed-text-v1.5" (768-dim).
 -- - Metadata is keyed on parent_asin. In user_reviews, parent_asin is a foreign key to metadata(parent_asin).

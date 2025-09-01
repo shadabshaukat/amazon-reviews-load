@@ -152,6 +152,15 @@ python3 amazon_reviews_loader.py --metadata meta_Cell_Phones_and_Accessories.jso
 
 ---
 
+## WebApp for Search
+
+```bash
+uvicorn search_app:app --host 0.0.0.0 --port 8000 --reload
+```
+
+Open -> http://localhost:8000/
+---
+
 ## Schema Notes
 
 - The `user_reviews.embedding` column uses the `vector(768)` type for rapid semantic and hybrid search.
