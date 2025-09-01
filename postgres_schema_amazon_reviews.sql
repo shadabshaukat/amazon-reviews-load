@@ -2,17 +2,6 @@
 -- Optional: Cleanup (drop objects for full redeployment, in dependency order)
 -- Un-comment the following DROP statements to remove all objects before recreate
 -- ---------------------------------------------------------------------------
--- DROP INDEX IF EXISTS idx_user_reviews_embedding;
--- DROP INDEX IF EXISTS idx_user_reviews_fts;
--- DROP INDEX IF EXISTS idx_metadata_fts;
--- DROP INDEX IF EXISTS idx_metadata_title_trgm;
--- DROP INDEX IF EXISTS idx_metadata_store_trgm;
--- DROP INDEX IF EXISTS idx_metadata_categories_gin;
--- DROP INDEX IF EXISTS idx_metadata_details_gin;
--- DROP TABLE IF EXISTS user_reviews CASCADE;
--- DROP TABLE IF EXISTS metadata CASCADE;
--- DROP EXTENSION IF EXISTS vector CASCADE;
--- DROP EXTENSION IF EXISTS pg_trgm CASCADE;
 
 -- Enable required extensions
 CREATE EXTENSION IF NOT EXISTS vector;
