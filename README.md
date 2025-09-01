@@ -179,6 +179,11 @@ Open >> http://localhost:8000/
 ## Review Search Page
 <img width="935" height="683" alt="Screenshot 2025-09-02 at 12 18 19 AM" src="https://github.com/user-attachments/assets/c24644cd-0a17-4e45-81ab-b77b036ee0f3" />
 
+## AI Summary
+<img width="712" height="610" alt="Screenshot 2025-09-02 at 3 25 40 AM" src="https://github.com/user-attachments/assets/abdc3113-09a2-492f-a391-8b2fdf71365a" />
+
+<img width="712" height="610" alt="Screenshot 2025-09-02 at 3 25 56 AM" src="https://github.com/user-attachments/assets/91953aae-e903-4253-a52e-68e2720978ce" />
+
 
 ---
 
