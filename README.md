@@ -1,4 +1,4 @@
-# Amazon Reviews Loader: Postgres + Vector Embeddings + FTS
+# Amazon Reviews Loader: Postgres + Vector Embeddings + FTS + Search WebApp
 
 This project provides a scalable, robust pipeline to efficiently load Amazon Reviews JSONL datasets and their metadata into a Postgres 16+ database with:
 - Full Text Search (FTS) via `tsvector`
@@ -26,6 +26,8 @@ This project provides a scalable, robust pipeline to efficiently load Amazon Rev
 amazon_reviews_loader/
 ├── amazon_reviews_loader.py   # Main loader script (metadata + reviews + multi-gpu)
 ├── requirements_amazon_reviews_loader.txt
+├── postgres_schema_amazon_reviews.sql    # Table, index, extension schema
+├── search_app.py                         # Search WebApp
 ├── postgres_schema_amazon_reviews.sql    # Table, index, extension schema
 ├── README.md
 ├── meta_Cell_Phones_and_Accessories.jsonl   # Example metadata JSONL file
@@ -62,8 +64,14 @@ gzip -d meta_Cell_Phones_and_Accessories.jsonl.gz
 
 ```bash
 python3 -m venv venv
+```
+```bash
 source venv/bin/activate
+```
+```bash
 pip3 install -r requirements_amazon_reviews_loader.txt
+```
+```bash
 pip install --upgrade pip
 ```
 
@@ -152,13 +160,20 @@ python3 amazon_reviews_loader.py --metadata meta_Cell_Phones_and_Accessories.jso
 
 ---
 
-## WebApp for Search
+# WebApp for Search
 
 ```bash
 uvicorn search_app:app --host 0.0.0.0 --port 8000 --reload
 ```
+Open >> http://localhost:8000/
 
-Open -> http://localhost:8000/
+## Product Search Page
+<img width="933" height="683" alt="Screenshot 2025-09-02 at 12 14 06 AM" src="https://github.com/user-attachments/assets/2a37e1ea-70e3-4ab9-90ef-528e564d0c8b" />
+
+## Review Search Page
+<img width="935" height="683" alt="Screenshot 2025-09-02 at 12 18 19 AM" src="https://github.com/user-attachments/assets/c24644cd-0a17-4e45-81ab-b77b036ee0f3" />
+
+
 ---
 
 ## Schema Notes
