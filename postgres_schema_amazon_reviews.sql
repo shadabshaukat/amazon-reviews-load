@@ -40,18 +40,15 @@ CREATE TABLE IF NOT EXISTS metadata (
 -- Create a generated tsvector that indexes key textual fields and JSONB content.
 -- This mirrors user_reviews.fts and enables fast product/attribute search.
 ALTER TABLE metadata
-ADD COLUMN IF NOT EXISTS meta_fts tsvector
+ADD COLUMN meta_fts tsvector
 GENERATED ALWAYS AS (
-  to_tsvector(
-    'english',
-      coalesce(title, '') || ' '
-    || coalesce(main_category, '') || ' '
-    || coalesce(store, '') || ' '
-    || coalesce(features::text, '') || ' '
-    || coalesce(description::text, '') || ' '
-    || coalesce(categories::text, '') || ' '
-    || coalesce(details::text, '')
-  )
+setweight(to_tsvector('english', coalesce(title, '')), 'A')
+|| setweight(to_tsvector('english', coalesce(main_category, '')), 'B')
+|| setweight(to_tsvector('english', coalesce(store, '')), 'C')
+|| setweight(to_tsvector('english', coalesce(features::text, '')), 'D')
+|| setweight(to_tsvector('english', coalesce(description::text, '')), 'D')
+|| setweight(to_tsvector('english', coalesce(categories::text, '')), 'D')
+|| setweight(to_tsvector('english', coalesce(details::text, '')), 'D')
 ) STORED;
 
 -- Indexes to accelerate FTS and common fuzzy lookups on metadata
