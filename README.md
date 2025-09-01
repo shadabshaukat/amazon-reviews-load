@@ -84,19 +84,21 @@ sudo iptables -I INPUT -p tcp --dport 8000 -j ACCEPT
 - Ensure Postgres 16+ is running.
 - Enable required extensions as a superuser (do this once per database):
   ```sql
+  psql -h 10.150.2.226 -d postgres -U postgres
+  
   CREATE EXTENSION IF NOT EXISTS vector;
   CREATE EXTENSION IF NOT EXISTS pg_trgm;
   ```
 - Apply the schema:
   ```bash
-  psql -U youruser -d yourdb -f postgres_schema_amazon_reviews.sql
+    psql -h 10.150.2.226 -d postgres -U postgres -f postgres_schema_amazon_reviews.sql
   ```
 
 ### 5. Configure Database Connection
 
 Create a `.env` file in your project directory with:
 ```env
-PGHOST=localhost
+PGHOST=10.150.2.226
 PGPORT=5432
 PGDATABASE=your_db_name
 PGUSER=your_user
