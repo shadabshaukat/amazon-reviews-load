@@ -50,8 +50,12 @@ cd amazon-reviews-loader/
 ```
 
 ### 2. Download Dataset
+`Original Dataset` : https://amazon-reviews-2023.github.io/
+
+`Huggingface` : https://huggingface.co/datasets/McAuley-Lab/Amazon-Reviews-2023
 
 Download Dataset from Hugging Face : https://huggingface.co/datasets/shadabshaukat/amazon-cell-phones-accessories-user-reviews-metadata-may96-sep23
+
 
 ```bash
 wget https://huggingface.co/datasets/shadabshaukat/amazon-cell-phones-accessories-user-reviews-metadata-may96-sep23/resolve/main/meta_Cell_Phones_and_Accessories.jsonl.gz
@@ -63,9 +67,8 @@ gzip -d Cell_Phones_and_Accessories.jsonl.gz
 gzip -d meta_Cell_Phones_and_Accessories.jsonl.gz
 ```
 
-`Original Dataset` : https://amazon-reviews-2023.github.io/
+Note : If you want to download the full dataset switch to directory `data\` and run `download-amazon-reviews-dataset.sh`
 
-`Huggingface` : https://huggingface.co/datasets/McAuley-Lab/Amazon-Reviews-2023
 
 ### 3. Install Requirements
 
