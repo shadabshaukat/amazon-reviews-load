@@ -65,6 +65,8 @@ gzip -d Cell_Phones_and_Accessories.jsonl.gz
 gzip -d meta_Cell_Phones_and_Accessories.jsonl.gz
 ```
 
+Original Dataset : https://amazon-reviews-2023.github.io/
+
 ### 3. Install Requirements
 
 ```bash
