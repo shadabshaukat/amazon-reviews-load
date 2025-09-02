@@ -1,5 +1,10 @@
 # Amazon Reviews Loader: Postgres + Vector Embeddings + FTS + Search WebApp
 
+<img width="798" height="376" alt="Screenshot 2025-09-02 at 12 48 24 PM" src="https://github.com/user-attachments/assets/2bc26c5e-e421-4dd4-9d47-05d1ce75b817" />
+
+<img width="1184" height="518" alt="Screenshot 2025-09-02 at 12 48 05 PM" src="https://github.com/user-attachments/assets/fe1127e9-ef1b-4d26-b907-4a71d37739e2" />
+
+
 This project provides a scalable, robust pipeline to efficiently load Amazon Reviews JSONL datasets and their metadata into a Postgres 16+ database with:
 - Full Text Search (FTS) via `tsvector`
 - Fast semantic similarity search via pgvector (`vector` type)
