@@ -102,12 +102,27 @@ sudo iptables -I INPUT -p tcp --dport 8000 -j ACCEPT
 ### 5. Configure Database Connection
 
 Create a `.env` file in your project directory with:
+
 ```env
 PGHOST=10.150.2.226
 PGPORT=5432
 PGDATABASE=your_db_name
 PGUSER=your_user
 PGPASSWORD=your_password
+```
+
+### 6. Configure OCI0Cli Credentials and Environment Variables
+
+Add below environment variables to `.env` file in your project directory after installing and configuring oci-cli
+
+```env
+OCI_USER_OCID=ocid1.user.oc1..aaaaaaaa5cq3iewffep5nzqb7qzoe6mpj45gt4kndvzwvuxzzavpbiucqqaq
+OCI_KEY_FILE=/Users/shadab/Downloads/OracleContent/Keys/oci_config/oci_api_key.pem
+OCI_KEY_FINGERPRINT=de:50:15:13:af:bd:76:fa:f4:77:ad:d4:af:70:a5:d6
+OCI_TENANCY_OCID=ocid1.tenancy.oc1..aaaaaaaafhegmvy2da7xzh2b5jbmhdkfr4cr4e37m5filt4zgxs6mfl7icua
+OCI_REGION=us-chicago-1
+OCI_COMPARTMENT_OCID=ocid1.compartment.oc1..aaaaaaaacoqxp2n77ra2343maw2px4rlrtzqaw5ord6be2cbrbwlrpqwegxa
+OCI_GENAI_MODEL_OCID=ocid1.generativeaimodel.oc1.us-chicago-1.amaaaaaask7dceyayjawvuonfkw2ua4bob4rlnnlhs522pafbglivtwlfzta
 ```
 
 ---
