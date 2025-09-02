@@ -65,7 +65,9 @@ gzip -d Cell_Phones_and_Accessories.jsonl.gz
 gzip -d meta_Cell_Phones_and_Accessories.jsonl.gz
 ```
 
-Original Dataset : https://amazon-reviews-2023.github.io/
+`Original Dataset` : https://amazon-reviews-2023.github.io/
+
+`Huggingface` : https://huggingface.co/datasets/McAuley-Lab/Amazon-Reviews-2023
 
 ### 3. Install Requirements
 
