@@ -406,6 +406,6 @@ LIMIT 10;
 
 ## License
 
-MIT. Copyright (c).
+amazon-reviews-loader is licensed under Apache 2.0 License.
 
 ---
